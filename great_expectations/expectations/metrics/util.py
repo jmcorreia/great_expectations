@@ -1,4 +1,5 @@
 import logging
+import re
 import warnings
 from typing import Any, Dict, List, Optional
 
@@ -348,7 +349,10 @@ def get_sqlalchemy_column_metadata(
         try:
             # if a custom query was passed
             if isinstance(table_selectable, TextClause):
-                columns = table_selectable.selected_columns.columns
+                if hasattr(table_selectable, "selected_columns"):
+                    columns = table_selectable.selected_columns.columns
+                else:
+                    columns = table_selectable.columns().columns
             else:
                 columns = inspector.get_columns(
                     table_selectable,
@@ -507,6 +511,12 @@ def column_reflection_fallback(
             table_name = selectable.name
         except AttributeError:
             table_name = selectable
+            if str(table_name).lower().startswith("select"):
+                rx = re.compile(r"^.* from ([\S]+)", re.I)
+                match = rx.match(str(table_name).replace("\n", ""))
+                if match:
+                    table_name = match.group(1)
+        schema_name = sqlalchemy_engine.dialect.default_schema_name
 
         tables_table: sa.Table = sa.Table(
             "tables",
@@ -560,7 +570,14 @@ def column_reflection_fallback(
                     right=columns_table_query, onclause=conditions, isouter=False
                 )
             )
-            .where(tables_table_query.c.table_name == table_name)
+            .where(
+                sa.and_(
+                    *(
+                        tables_table_query.c.table_name == table_name,
+                        tables_table_query.c.schema_name == schema_name,
+                    )
+                )
+            )
             .order_by(
                 tables_table_query.c.schema_name.asc(),
                 tables_table_query.c.table_name.asc(),
