@@ -100,7 +100,7 @@ class ExpectColumnValuesToOnlyContainVowels(RegexBasedColumnMapExpectation):
                 },
                 {
                     "backend": "sqlalchemy",
-                    "dialects": ["sqlite", "postgresql", "mssql"],
+                    "dialects": ["sqlite", "postgresql"],
                 },
                 {
                     "backend": "spark",
