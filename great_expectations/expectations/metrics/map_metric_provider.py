@@ -86,10 +86,10 @@ def column_function_partial(
             def inner_func(
                 cls,
                 execution_engine: PandasExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     df,
@@ -144,10 +144,10 @@ def column_function_partial(
             def inner_func(
                 cls,
                 execution_engine: SqlAlchemyExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 filter_column_isnull = kwargs.get(
                     "filter_column_isnull", getattr(cls, "filter_column_isnull", False)
@@ -212,10 +212,10 @@ def column_function_partial(
             def inner_func(
                 cls,
                 execution_engine: SparkDFExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 filter_column_isnull = kwargs.get(
                     "filter_column_isnull", getattr(cls, "filter_column_isnull", False)
@@ -306,10 +306,10 @@ def column_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: PandasExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     df,
@@ -433,10 +433,10 @@ def column_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: SqlAlchemyExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     selectable,
@@ -515,10 +515,10 @@ def column_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: SparkDFExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     data,
@@ -613,10 +613,10 @@ def column_pair_function_partial(
             def inner_func(
                 cls,
                 execution_engine: PandasExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     df,
@@ -672,10 +672,10 @@ def column_pair_function_partial(
             def inner_func(
                 cls,
                 execution_engine: SqlAlchemyExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     selectable,
@@ -735,10 +735,10 @@ def column_pair_function_partial(
             def inner_func(
                 cls,
                 execution_engine: SparkDFExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     data,
@@ -824,10 +824,10 @@ def column_pair_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: PandasExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     df,
@@ -890,10 +890,10 @@ def column_pair_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: SqlAlchemyExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     selectable,
@@ -964,10 +964,10 @@ def column_pair_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: SparkDFExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     data,
@@ -1049,10 +1049,10 @@ def multicolumn_function_partial(
             def inner_func(
                 cls,
                 execution_engine: PandasExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     df,
@@ -1102,10 +1102,10 @@ def multicolumn_function_partial(
             def inner_func(
                 cls,
                 execution_engine: SqlAlchemyExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     selectable,
@@ -1172,10 +1172,10 @@ def multicolumn_function_partial(
             def inner_func(
                 cls,
                 execution_engine: SparkDFExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     data,
@@ -1255,10 +1255,10 @@ def multicolumn_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: PandasExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     df,
@@ -1315,10 +1315,10 @@ def multicolumn_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: SqlAlchemyExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     selectable,
@@ -1386,10 +1386,10 @@ def multicolumn_condition_partial(
             def inner_func(
                 cls,
                 execution_engine: SparkDFExecutionEngine,
-                metric_domain_kwargs: Dict,
-                metric_value_kwargs: Dict,
+                metric_domain_kwargs: dict,
+                metric_value_kwargs: dict,
                 metrics: Dict[str, Any],
-                runtime_configuration: Dict,
+                runtime_configuration: dict,
             ):
                 (
                     data,
@@ -1430,8 +1430,8 @@ def multicolumn_condition_partial(
 def _pandas_map_condition_unexpected_count(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -1454,8 +1454,8 @@ def _polars_map_condition_unexpected_count(
 def _pandas_column_map_condition_values(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -1562,8 +1562,8 @@ def _polars_column_map_condition_values(
 def _pandas_column_pair_map_condition_values(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -1682,8 +1682,8 @@ def _polars_column_pair_map_condition_values(
 def _pandas_column_pair_map_condition_filtered_row_count(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -1764,8 +1764,8 @@ def _polars_column_pair_map_condition_filtered_row_count(
 def _pandas_multicolumn_map_condition_values(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -1864,8 +1864,8 @@ def _polars_multicolumn_map_condition_values(
 def _pandas_multicolumn_map_condition_filtered_row_count(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -1936,8 +1936,8 @@ def _polars_multicolumn_map_condition_filtered_row_count(
 def _pandas_column_map_series_and_domain_values(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2080,8 +2080,8 @@ def _polars_column_map_series_and_domain_values(
 def _pandas_map_condition_index(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ) -> Union[List[int], List[Dict[str, Any]]]:
@@ -2221,8 +2221,8 @@ def _polars_map_condition_index(
 def _pandas_column_map_condition_value_counts(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2355,8 +2355,8 @@ def _polars_column_map_condition_value_counts(
 def _pandas_map_condition_rows(
     cls,
     execution_engine: PandasExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2475,8 +2475,8 @@ def _polars_map_condition_rows(
 def _sqlalchemy_map_condition_unexpected_count_aggregate_fn(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2500,8 +2500,8 @@ def _sqlalchemy_map_condition_unexpected_count_aggregate_fn(
 def _sqlalchemy_map_condition_unexpected_count_value(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2596,8 +2596,8 @@ def _sqlalchemy_map_condition_unexpected_count_value(
 def _sqlalchemy_column_map_condition_values(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2654,8 +2654,8 @@ def _sqlalchemy_column_map_condition_values(
 def _sqlalchemy_column_pair_map_condition_values(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2709,8 +2709,8 @@ def _sqlalchemy_column_pair_map_condition_values(
 def _sqlalchemy_column_pair_map_condition_filtered_row_count(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2744,8 +2744,8 @@ def _sqlalchemy_column_pair_map_condition_filtered_row_count(
 def _sqlalchemy_multicolumn_map_condition_values(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2793,8 +2793,8 @@ def _sqlalchemy_multicolumn_map_condition_values(
 def _sqlalchemy_multicolumn_map_condition_filtered_row_count(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2830,8 +2830,8 @@ def _sqlalchemy_multicolumn_map_condition_filtered_row_count(
 def _sqlalchemy_column_map_condition_value_counts(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2876,8 +2876,8 @@ def _sqlalchemy_column_map_condition_value_counts(
 def _sqlalchemy_map_condition_rows(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2917,8 +2917,8 @@ def _sqlalchemy_map_condition_rows(
 def _spark_map_condition_unexpected_count_aggregate_fn(
     cls,
     execution_engine: SparkDFExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2935,8 +2935,8 @@ def _spark_map_condition_unexpected_count_aggregate_fn(
 def _spark_map_condition_unexpected_count_value(
     cls,
     execution_engine: SparkDFExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -2961,8 +2961,8 @@ def _spark_map_condition_unexpected_count_value(
 def _spark_column_map_condition_values(
     cls,
     execution_engine: SparkDFExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -3009,8 +3009,8 @@ def _spark_column_map_condition_values(
 def _spark_column_map_condition_value_counts(
     cls,
     execution_engine: SparkDFExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -3050,8 +3050,8 @@ def _spark_column_map_condition_value_counts(
 def _spark_map_condition_rows(
     cls,
     execution_engine: SparkDFExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -3080,8 +3080,8 @@ def _spark_map_condition_rows(
 def _spark_column_pair_map_condition_values(
     cls,
     execution_engine: SparkDFExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -3142,8 +3142,8 @@ def _spark_column_pair_map_condition_values(
 def _spark_column_pair_map_condition_filtered_row_count(
     cls,
     execution_engine: SparkDFExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -3175,8 +3175,8 @@ def _spark_column_pair_map_condition_filtered_row_count(
 def _spark_multicolumn_map_condition_values(
     cls,
     execution_engine: SqlAlchemyExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
@@ -3237,8 +3237,8 @@ def _spark_multicolumn_map_condition_values(
 def _spark_multicolumn_map_condition_filtered_row_count(
     cls,
     execution_engine: SparkDFExecutionEngine,
-    metric_domain_kwargs: Dict,
-    metric_value_kwargs: Dict,
+    metric_domain_kwargs: dict,
+    metric_value_kwargs: dict,
     metrics: Dict[str, Any],
     **kwargs,
 ):
