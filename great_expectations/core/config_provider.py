@@ -6,16 +6,16 @@ from abc import ABC, abstractmethod
 from collections import OrderedDict
 from typing import Any, Dict, Optional, Type, cast
 
-from great_expectations.core.config_substitutor import ConfigurationSubstitutor
+from great_expectations.core.config_substitutor import _ConfigurationSubstitutor
 from great_expectations.core.yaml_handler import YAMLHandler
 from great_expectations.data_context.types.base import GXCloudConfig
 
 yaml = YAMLHandler()
 
 
-class AbstractConfigurationProvider(ABC):
+class _AbstractConfigurationProvider(ABC):
     def __init__(self) -> None:
-        self._substitutor = ConfigurationSubstitutor()
+        self._substitutor = _ConfigurationSubstitutor()
 
     @abstractmethod
     def get_values(self) -> Dict[str, str]:
@@ -44,7 +44,7 @@ class AbstractConfigurationProvider(ABC):
         return self._substitutor.substitute_all_config_variables(config, config_values)
 
 
-class ConfigurationProvider(AbstractConfigurationProvider):
+class _ConfigurationProvider(_AbstractConfigurationProvider):
     """
     Wrapper class around the other environment-specific configuraiton provider classes.
 
@@ -57,11 +57,11 @@ class ConfigurationProvider(AbstractConfigurationProvider):
 
     def __init__(self) -> None:
         self._providers: OrderedDict[
-            Type[AbstractConfigurationProvider], AbstractConfigurationProvider
+            Type[_AbstractConfigurationProvider], _AbstractConfigurationProvider
         ] = OrderedDict()
         super().__init__()
 
-    def register_provider(self, provider: AbstractConfigurationProvider) -> None:
+    def register_provider(self, provider: _AbstractConfigurationProvider) -> None:
         """
         Saves a configuration provider to the object's state for downstream usage.
         See `get_values()` for more information.
@@ -75,8 +75,8 @@ class ConfigurationProvider(AbstractConfigurationProvider):
         self._providers[type_] = provider
 
     def get_provider(
-        self, type_: Type[AbstractConfigurationProvider]
-    ) -> Optional[AbstractConfigurationProvider]:
+        self, type_: Type[_AbstractConfigurationProvider]
+    ) -> Optional[_AbstractConfigurationProvider]:
         """
         Retrieves a registered configuration provider (if available).
 
@@ -102,7 +102,7 @@ class ConfigurationProvider(AbstractConfigurationProvider):
         return values
 
 
-class RuntimeEnvironmentConfigurationProvider(AbstractConfigurationProvider):
+class _RuntimeEnvironmentConfigurationProvider(_AbstractConfigurationProvider):
     """
     Responsible for the management of the runtime_environment dictionary provided at runtime.
     """
@@ -115,7 +115,7 @@ class RuntimeEnvironmentConfigurationProvider(AbstractConfigurationProvider):
         return self._runtime_environment
 
 
-class EnvironmentConfigurationProvider(AbstractConfigurationProvider):
+class _EnvironmentConfigurationProvider(_AbstractConfigurationProvider):
     """
     Responsible for the management of environment variables.
     """
@@ -127,7 +127,7 @@ class EnvironmentConfigurationProvider(AbstractConfigurationProvider):
         return dict(os.environ)
 
 
-class ConfigurationVariablesConfigurationProvider(AbstractConfigurationProvider):
+class _ConfigurationVariablesConfigurationProvider(_AbstractConfigurationProvider):
     """
     Responsible for the management of user-defined configuration variables.
 
@@ -169,12 +169,12 @@ class ConfigurationVariablesConfigurationProvider(AbstractConfigurationProvider)
             return {}
 
 
-class CloudConfigurationProvider(AbstractConfigurationProvider):
+class _CloudConfigurationProvider(_AbstractConfigurationProvider):
     """
     Responsible for the management of a user's GX Cloud credentials.
 
-    See `GeCloudConfig` for more information. Note that this is only registered on the primary
-    config provider when in a Cloud-backend environment.
+    See `GXCloudConfig` for more information. Note that this is only registered on the primary
+    config provider when in a Cloud-backed environment.
     """
 
     def __init__(self, cloud_config: GXCloudConfig) -> None:
@@ -185,8 +185,26 @@ class CloudConfigurationProvider(AbstractConfigurationProvider):
             GXCloudEnvironmentVariable,
         )
 
-        return {
-            GXCloudEnvironmentVariable.BASE_URL: self._cloud_config.base_url,
-            GXCloudEnvironmentVariable.ACCESS_TOKEN: self._cloud_config.access_token,
-            GXCloudEnvironmentVariable.ORGANIZATION_ID: self._cloud_config.organization_id,  # type: ignore[dict-item]
+        base_url = self._cloud_config.base_url
+        access_token = self._cloud_config.access_token
+        organization_id = self._cloud_config.organization_id
+
+        cloud_values: Dict[str, str] = {
+            GXCloudEnvironmentVariable.BASE_URL: base_url,
+            GXCloudEnvironmentVariable.ACCESS_TOKEN: access_token,
+            # <GX_RENAME> Deprecated as of 0.15.37
+            GXCloudEnvironmentVariable._OLD_BASE_URL: base_url,
+            GXCloudEnvironmentVariable._OLD_ACCESS_TOKEN: access_token,
         }
+
+        # organization_id is nullable so we conditionally include it in the output
+        if organization_id:
+            cloud_values.update(
+                {
+                    GXCloudEnvironmentVariable.ORGANIZATION_ID: organization_id,
+                    # <GX_RENAME> Deprecated as of 0.15.37
+                    GXCloudEnvironmentVariable._OLD_ORGANIZATION_ID: organization_id,
+                }
+            )
+
+        return cloud_values

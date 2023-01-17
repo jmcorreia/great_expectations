@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 
 import pyparsing as pp
 
-import great_expectations.exceptions as ge_exceptions
+import great_expectations.exceptions as gx_exceptions
 from great_expectations.types import safe_deep_copy
 from great_expectations.util import load_class, verify_dynamic_loading_support
 
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 # TODO: Rename config to constructor_kwargs and config_defaults -> constructor_kwarg_default
 # TODO: Improve error messages in this method. Since so much of our workflow is config-driven, this will be a *super* important part of DX.
 def instantiate_class_from_config(config, runtime_environment, config_defaults=None):
-    """Build a GE class from configuration dictionaries."""
+    """Build a GX class from configuration dictionaries."""
 
     if config_defaults is None:
         config_defaults = {}
@@ -123,13 +123,13 @@ def build_store_from_config(
             runtime_environment=runtime_environment,
             config_defaults=config_defaults,
         )
-    except ge_exceptions.DataContextError as e:
+    except gx_exceptions.DataContextError as e:
         new_store = None
         logger.critical(f"Error {e} occurred while attempting to instantiate a store.")
     if not new_store:
         class_name: str = store_config["class_name"]
         module_name = store_config["module_name"]
-        raise ge_exceptions.ClassInstantiationError(
+        raise gx_exceptions.ClassInstantiationError(
             module_name=module_name,
             package_name=None,
             class_name=class_name,

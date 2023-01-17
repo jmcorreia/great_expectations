@@ -1,6 +1,8 @@
 from typing import Dict, Optional
 
 from great_expectations.core.expectation_configuration import ExpectationConfiguration
+from great_expectations.core.metric_domain_types import MetricDomainTypes
+from great_expectations.core.metric_function_types import MetricFunctionTypes
 from great_expectations.exceptions.exceptions import (
     InvalidExpectationConfigurationError,
 )
@@ -17,13 +19,11 @@ from great_expectations.expectations.expectation import (
 )
 from great_expectations.expectations.metrics import (
     ColumnAggregateMetricProvider,
-    MetricDomainTypes,
-    MetricFunctionTypes,
     column_aggregate_partial,
     column_aggregate_value,
-    metric_value,
 )
 from great_expectations.expectations.metrics.import_manager import F, sa
+from great_expectations.expectations.metrics.metric_provider import metric_value
 from great_expectations.render import RenderedStringTemplateContent
 from great_expectations.render.renderer.renderer import renderer
 from great_expectations.render.util import (
@@ -147,7 +147,7 @@ class ExpectColumnMaxToBeBetweenCustom(ColumnExpectation):
     }
 
     def validate_configuration(
-        self, configuration: Optional[ExpectationConfiguration]
+        self, configuration: Optional[ExpectationConfiguration] = None
     ) -> None:
         """
         Validates that a configuration has been set, and sets a configuration if it has yet to be set. Ensures that
@@ -161,8 +161,7 @@ class ExpectColumnMaxToBeBetweenCustom(ColumnExpectation):
 
         # Setting up a configuration
         super().validate_configuration(configuration)
-        if configuration is None:
-            configuration = self.configuration
+        configuration = configuration or self.configuration
 
         min_value = configuration.kwargs["min_value"]
         max_value = configuration.kwargs["max_value"]
@@ -236,7 +235,6 @@ class ExpectColumnMaxToBeBetweenCustom(ColumnExpectation):
         cls,
         configuration: ExpectationConfiguration = None,
         result: ExpectationValidationResult = None,
-        language: str = None,
         runtime_configuration: dict = None,
         **kwargs,
     ):
@@ -245,9 +243,8 @@ class ExpectColumnMaxToBeBetweenCustom(ColumnExpectation):
         ), "Must provide renderers either a configuration or result."
 
         runtime_configuration = runtime_configuration or {}
-        include_column_name = runtime_configuration.get("include_column_name", True)
         include_column_name = (
-            include_column_name if include_column_name is not None else True
+            False if runtime_configuration.get("include_column_name") is False else True
         )
         styling = runtime_configuration.get("styling")
         # get params dict with all expected kwargs

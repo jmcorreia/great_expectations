@@ -3,7 +3,7 @@ from unittest import mock
 
 import pytest
 
-from great_expectations.core.config_provider import ConfigurationProvider
+from great_expectations.core.config_provider import _ConfigurationProvider
 from great_expectations.data_context import AbstractDataContext
 from great_expectations.data_context.data_context_variables import (
     DataContextVariables,
@@ -24,7 +24,7 @@ class StubDatasourceStore(DatasourceStore):
         pass
 
 
-class StubConfigurationProvider(ConfigurationProvider):
+class StubConfigurationProvider(_ConfigurationProvider):
     def __init__(self, config_values=None) -> None:
         self._config_values = config_values or {}
         super().__init__()
@@ -55,6 +55,10 @@ class FakeAbstractDataContext(AbstractDataContext):
         pass
 
     def _init_datasource_store(self):
+        """Abstract method. Only a stub is needed."""
+        pass
+
+    def _init_project_config(self, project_config):
         """Abstract method. Only a stub is needed."""
         pass
 

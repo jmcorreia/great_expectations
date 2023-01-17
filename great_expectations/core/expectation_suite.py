@@ -20,7 +20,7 @@ from typing import (
 
 from marshmallow import Schema, ValidationError, fields, pre_dump
 
-import great_expectations as ge
+import great_expectations as gx
 from great_expectations import __version__ as ge_version
 from great_expectations.core.evaluation_parameters import (
     _deduplicate_evaluation_parameter_dependencies,
@@ -154,7 +154,7 @@ class ExpectationSuite(SerializableDictDot):
             "profiler_config": profiler_config,
             "comment": comment,
         }
-        ge.util.filter_properties_dict(
+        gx.util.filter_properties_dict(
             properties=citation, clean_falsy=True, inplace=True
         )
         self.meta["citations"].append(citation)
@@ -562,7 +562,7 @@ class ExpectationSuite(SerializableDictDot):
         """
         This is a private method for adding expectations that allows for usage_events to be suppressed when
         Expectations are added through internal processing (ie. while building profilers, rendering or validation). It
-        takes in send_usage_event boolean.
+        takes in send_usage_event boolean.  If successful, upserts ExpectationConfiguration into this ExpectationSuite.
 
         Args:
             expectation_configuration: The ExpectationConfiguration to add or update
@@ -642,7 +642,8 @@ class ExpectationSuite(SerializableDictDot):
         match_type: str = "domain",
         overwrite_existing: bool = True,
     ) -> List[ExpectationConfiguration]:
-        """
+        """Upsert a list of ExpectationConfigurations into this ExpectationSuite.
+
         Args:
             expectation_configurations: The List of candidate new/modifed "ExpectationConfiguration" objects for Suite.
             send_usage_event: Whether to send a usage_statistics event. When called through ExpectationSuite class'
@@ -680,7 +681,8 @@ class ExpectationSuite(SerializableDictDot):
         match_type: str = "domain",
         overwrite_existing: bool = True,
     ) -> ExpectationConfiguration:
-        """
+        """Upsert specified ExpectationConfiguration into this ExpectationSuite.
+
         Args:
             expectation_configuration: The ExpectationConfiguration to add or update
             send_usage_event: Whether to send a usage_statistics event. When called through ExpectationSuite class'
